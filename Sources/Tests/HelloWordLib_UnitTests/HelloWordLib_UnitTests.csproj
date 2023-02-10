@@ -19,7 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\HelloWorldLib\HelloWorldLib.csproj" />
-  </ItemGroup>
 </Project>
