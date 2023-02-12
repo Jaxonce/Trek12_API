@@ -22,6 +22,7 @@ steps:
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:6.0
     commands:
+      - cd Sources/
       - dotnet restore Trek12_API.sln
       - dotnet test Trek12_API.sln --no-restore
     depends_on: [build]
@@ -29,6 +30,7 @@ steps:
   - name: code-analysis
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dronesonarplugin-dotnet6
     commands:
+      - cd Sources/
       - dotnet restore Trek12_API.sln
       - dotnet sonarscanner begin /k:Trek12_API /d:sonar.host.url="https://codefirst.iut.uca.fr/sonar"  /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
       - dotnet build Trek12_API.sln -c Release --no-restore
