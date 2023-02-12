@@ -27,10 +27,10 @@ steps:
     depends_on: [build]
 
   - name: code-analysis
-    image: hub.codefirst.iut.uca.fr/thomas.bellambois/codefirst-dronesonarplugin-dotnet6
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dronesonarplugin-dotnet6
     commands:
       - dotnet restore Trek12_API.sln
-      - dotnet sonarscanner begin /k:EfCore_Lol_S4 /d:sonar.host.url="https://codefirst.iut.uca.fr/sonar"  /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
+      - dotnet sonarscanner begin /k:Trek12_API /d:sonar.host.url="https://codefirst.iut.uca.fr/sonar"  /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
       - dotnet build Trek12_API.sln -c Release --no-restore
       - dotnet test Trek12_API.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
