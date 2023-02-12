@@ -15,6 +15,6 @@ steps:
         path: /docs
     commands:
       - cd Sources/
-      - dotnet restore Solution.sln
-      - dotnet build Solution.sln -c Release --no-restore
-      - dotnet publish Solution.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+      - dotnet restore Trek12_API.sln
+      - dotnet build Trek12_API.sln -c Release --no-restore
+      - dotnet publish Trek12_API.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
