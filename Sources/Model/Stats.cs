@@ -16,9 +16,7 @@ namespace Model
 
 
 		public Stats()
-        {
-            
-        }
+        {}
 
         public override string ToString()
             => $"{NbWin} {NbPlayed} {MaxChain} {MaxZone} {MaxZone}";

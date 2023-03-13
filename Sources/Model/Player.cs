@@ -25,6 +25,12 @@
         Stats = new Stats();
     }
 
+    public Player(string pseudo, Stats stats)
+    {
+        Pseudo = pseudo;
+        Stats = stats;
+    }
+
     //nécessaire ?
     //public bool Equals(Player? other)
     //        => Pseudo.Equals(other?.Pseudo);
