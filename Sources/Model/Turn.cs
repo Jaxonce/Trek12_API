@@ -17,7 +17,7 @@ namespace Model
             {
                 if (value > 6)
                 {
-                    throw new ArgumentException("a Case must have a value lower or equal to 12");
+                    throw new ArgumentException("a Cell must have a value lower or equal to 12");
                 }
                 diceValue1 = value;
             }
@@ -31,7 +31,7 @@ namespace Model
             {
                 if (value > 6)
                 {
-                    throw new ArgumentException("a Case must have a value lower or equal to 12");
+                    throw new ArgumentException("a Cell must have a value lower or equal to 12");
                 }
                 diceValue2 = value;
             }

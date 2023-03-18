@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public int Id { get; set; }
     public class Grille
     {
+        public int Id { get; set; }
         public int NbChaine { get; set; }
         public int NbZone { get; set; }
         public int MaxChaine { get; set; }
