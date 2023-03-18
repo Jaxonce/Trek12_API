@@ -8,6 +8,7 @@ namespace Model
 {
     public class Stats
     {
+        public int Id { get; set; }
         public int NbWin { get; set; } = 0;
         public int NbPlayed { get; set; } = 0;
         public int MaxChain { get; set; } = 0;

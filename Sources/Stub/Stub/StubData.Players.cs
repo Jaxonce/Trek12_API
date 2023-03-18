@@ -41,6 +41,16 @@ namespace Stub
 
             public Task<Player?> UpdateItem(Player? oldItem, Player? newItem)
              => parent.players.UpdateItem(oldItem, newItem);
+
+            private Func<Player, string, bool> filterByPseudo = (player, substring) => player.Pseudo.Contains(substring, StringComparison.InvariantCultureIgnoreCase);
+
+            public Task<IEnumerable<Player?>> GetItemsByPseudo(string charPseudo, int index, int count, string? orderingPropertyName, bool descending = false)
+               => parent.players.GetItemsWithFilterAndOrdering(player => filterByPseudo(player, charPseudo), index, count, orderingPropertyName, descending);
+
+            public Task<int> GetNbItemsByPseudo(string charPseudo)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

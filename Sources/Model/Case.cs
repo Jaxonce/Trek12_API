@@ -8,13 +8,14 @@ namespace Model
 {
     public class Case
     {
+        public int Id { get; set; }
         public int Valeur
         {
             get => valeur;
             set
             {
                 //pas évolutif car case dangereuse c'est 6 MAX
-                if (value > 12)
+                if (value > 12 || value < 0)
                 {
                     throw new ArgumentException("a Case must have a value lower or equal to 12");
                 }
@@ -23,9 +24,17 @@ namespace Model
         }
         private int valeur;
 
-        public Case(int valeur)
+        //public Case(int valeur)
+        //{
+        //    Valeur = valeur;
+        //}
+        public Case()
         {
-            Valeur = valeur;
+        }
+
+        public void AddValue(int valeur)
+        {
+            this.valeur = valeur;
         }
     }
 }

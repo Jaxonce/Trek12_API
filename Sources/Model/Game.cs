@@ -9,10 +9,12 @@ namespace Model
 {
     public class Game
     {
+        public int Id { get; set; }
+
         public TimeSpan Duration { get; set; }
         public DateOnly Date { get; set; }
-        public ReadOnlyCollection<Player> Players { get; private set; }
-        private List<Player> players = new();
+        //public ReadOnlyCollection<Player> Players { get; private set; }
+        //private List<Player> players = new();
 
         public ReadOnlyCollection<Turn> Turns { get; private set; }
         private List<Turn> turns = new();
@@ -25,28 +27,70 @@ namespace Model
 
         public GameMode GameMode { get; set; }
 
-        //public Grille Grille
-        //{
-        //    get => grille;
-        //    private init
-        //    {
-        //        if (value == null)
-        //            throw new ArgumentNullException("A grid can't be null for a game");
-        //        grille = value;
-        //    }
-        //}
-        //private Grille grille;
 
-        public Game(TimeSpan duration, DateOnly date, Dictionary<Player,Grille> grilles, Dictionary<Player, int> scores, List<Turn> turns, GameMode gameMode)
+        //public Game(TimeSpan duration, DateOnly date, Dictionary<Player,Grille> grilles, Dictionary<Player, int> scores, List<Turn> turns, GameMode gameMode,int id=0)
+        //{
+        //    Players = players.AsReadOnly();
+        //    Duration = duration;
+        //    Date = date;
+        //    Grilles = new ReadOnlyDictionary<Player, Grille>(grilles);
+        //    Scores = new ReadOnlyDictionary<Player, int>(scores);
+        //    Turns = turns.AsReadOnly();
+        //    GameMode = gameMode;
+        //    Id = id;
+
+        //}
+        public Game(DateOnly date, Player owner, GameMode gameMode, int id = 0)
         {
-            Players = players.AsReadOnly();
-            Duration = duration;
             Date = date;
             Grilles = new ReadOnlyDictionary<Player, Grille>(grilles);
             Scores = new ReadOnlyDictionary<Player, int>(scores);
-            Turns = turns.AsReadOnly();
+            Turns = new ReadOnlyCollection<Turn>(turns);
+            grilles.Add(owner, new Grille());
+            scores.Add(owner, 0);
             GameMode = gameMode;
+            Id = id;
 
+        }
+
+        public bool AddPlayerToGame(Player player)
+        {
+            if(grilles.ContainsKey(player) == false && scores.ContainsKey(player) == false)
+            {
+                grilles.Add(player, new Grille());
+                scores.Add(player, 0);
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddScoreToPlayer(Player player, int score)
+        {
+            if (grilles.ContainsKey(player) == true && scores.ContainsKey(player) == true)
+            {
+                scores[player] = score;
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddCaseValue(Player player, int value, int index)
+        {
+            if (grilles.ContainsKey(player) == true && scores.ContainsKey(player) == true)
+            {
+                return grilles[player].AddValueToCase(value, index);
+            }
+            return false;
+        }
+
+        public void AddTurn(Turn turn)
+        {
+            turns.Add(turn);
+        }
+
+        public void AddTime(TimeSpan time)
+        {
+            Duration = time;
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Model
 {
     public class GameMode
     {
+        public int Id { get; set; }
+
         public string Name
         {
             get => name;

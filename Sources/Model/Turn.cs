@@ -8,6 +8,8 @@ namespace Model
 {
     public class Turn
     {
+        public int Id { get; set; }
+
         public int DiceValue1
         {
             get => diceValue1;
