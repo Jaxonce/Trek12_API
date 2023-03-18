@@ -27,6 +27,8 @@ namespace Model
 
         public GameMode GameMode { get; set; }
 
+        public Player Player { get; set; }
+
 
         //public Game(TimeSpan duration, DateOnly date, Dictionary<Player,Grille> grilles, Dictionary<Player, int> scores, List<Turn> turns, GameMode gameMode,int id=0)
         //{
@@ -50,7 +52,7 @@ namespace Model
             scores.Add(owner, 0);
             GameMode = gameMode;
             Id = id;
-
+            Player = owner;
         }
 
         public bool AddPlayerToGame(Player player)
