@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public int Id { get; set; }
     public class Grille
     {
+        public int Id { get; set; }
         public int NbChaine { get; set; }
         public int NbZone { get; set; }
         public int MaxChaine { get; set; }
@@ -24,10 +24,15 @@ namespace Model
         //    Cases = cases.AsReadOnly();
         //}
 
-        public Grille()
+        public Grille(List<Case> cases)
         {
             Cases = new ReadOnlyCollection<Case>(cases);
-            cases.AddRange((Enumerable.Repeat(new Case(), 19)));
+            cases.AddRange(Enumerable.Repeat(new Case(), 19));
+        }
+
+        public Grille()
+        {
+
         }
 
         public bool AddValueToCase(int value, int index)

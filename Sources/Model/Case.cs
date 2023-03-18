@@ -24,12 +24,14 @@ namespace Model
         }
         private int valeur;
 
-        //public Case(int valeur)
-        //{
-        //    Valeur = valeur;
-        //}
         public Case()
         {
+
+        }
+
+        public Case(int valeur)
+        {
+            Valeur = valeur;
         }
 
         public void AddValue(int valeur)

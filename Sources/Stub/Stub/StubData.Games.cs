@@ -1,4 +1,5 @@
 ﻿using Model;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,27 +23,52 @@ namespace Stub
             public GamesManager(StubData parent)
                 => this.parent = parent;
 
-            public Task<Game?> AddItem(Game? item)
+            Task<bool> IGamesManager.AddCaseValueToPlayer(int id, int value, int index)
             {
                 throw new NotImplementedException();
             }
 
-            public Task<bool> DeleteItem(Game? item)
+            Task<Game?> IGenericDataManager<Game?>.AddItem(Game? item)
             {
                 throw new NotImplementedException();
             }
 
-            public Task<IEnumerable<Game?>> GetItems(int index, int count, string? orderingPropertyName = null, bool descending = false)
+            Task<bool> IGamesManager.AddPlayer(Player player)
             {
                 throw new NotImplementedException();
             }
 
-            public Task<int> GetNbItems()
+            Task<bool> IGamesManager.AddScoreToPlayer(int id, int score)
             {
                 throw new NotImplementedException();
             }
 
-            public Task<Game?> UpdateItem(Game? oldItem, Game? newItem)
+            Task<bool> IGamesManager.AddTime(TimeSpan time)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<bool> IGamesManager.AddTurn(Turn turn)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<bool> IGenericDataManager<Game?>.DeleteItem(Game? item)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<IEnumerable<Game?>> IGenericDataManager<Game?>.GetItems(int index, int count, string? orderingPropertyName, bool descending)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<int> IGenericDataManager<Game?>.GetNbItems()
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<Game?> IGenericDataManager<Game?>.UpdateItem(Game? oldItem, Game? newItem)
             {
                 throw new NotImplementedException();
             }
