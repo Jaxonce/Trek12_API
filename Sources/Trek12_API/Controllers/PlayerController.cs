@@ -99,7 +99,7 @@ namespace Trek12_API.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut("name=Update")]
         public async Task<IActionResult> Update(string pseudo, PlayerDTO playerOld)
         {
             Player playerOldModel = playerOld.toModel();
@@ -108,7 +108,7 @@ namespace Trek12_API.Controllers
             return Ok(playerNew);
         }
 
-        [HttpPut]
+        [HttpPut("name=UpdateMaxChain")]
         public async Task<IActionResult> UpdateMaxChain(int newMaxChain, PlayerDTO playerOld)
         {
             Player playerOldModel = playerOld.toModel();
@@ -118,7 +118,7 @@ namespace Trek12_API.Controllers
             return Ok(playerNew);
         }
 
-        [HttpPut]
+        [HttpPut("name=UpdateMaxPoints")]
         public async Task<IActionResult> UpdateMaxPoints(int newMaxPoints, PlayerDTO playerOld)
         {
             Player playerOldModel = playerOld.toModel();
@@ -128,7 +128,7 @@ namespace Trek12_API.Controllers
             return Ok(playerNew);
         }
 
-        [HttpPut]
+        [HttpPut("name=UpdateMaxZone")]
         public async Task<IActionResult> UpdateMaxZone(int newMaxZone, PlayerDTO playerOld)
         {
             Player playerOldModel = playerOld.toModel();
@@ -138,7 +138,7 @@ namespace Trek12_API.Controllers
             return Ok(playerNew);
         }
 
-        [HttpPut]
+        [HttpPut("name=UpdateWin")]
         public async Task<IActionResult> UpdateWin(int newMaxZone, PlayerDTO playerOld)
         {
             Player playerOldModel = playerOld.toModel();
