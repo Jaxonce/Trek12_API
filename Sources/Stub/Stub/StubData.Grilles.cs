@@ -24,22 +24,22 @@ namespace Stub
                 => this.parent = parent;
 
             public Task<Grille?> AddItem(Grille? item)
-             => parent.grilles.AddItem(item);
+                => parent.grilles.AddItem(item);
 
             public Task<bool> DeleteItem(Grille? item)
-             => parent.grilles.DeleteItem(item);
+                => parent.grilles.DeleteItem(item);
 
             public Task<IEnumerable<Grille?>> GetItems(int index, int count, string? orderingPropertyName = null, bool descending = false)
-            => parent.grilles.GetItemsWithFilterAndOrdering(
+                => parent.grilles.GetItemsWithFilterAndOrdering(
                         c => true,
                         index, count,
                         orderingPropertyName, descending);
 
             public Task<int> GetNbItems()
-            => Task.FromResult(parent.grilles.Count);
+                => Task.FromResult(parent.grilles.Count);
 
             public Task<Grille?> UpdateItem(Grille? oldItem, Grille? newItem)
-             => parent.grilles.UpdateItem(oldItem,newItem);
+                => parent.grilles.UpdateItem(oldItem,newItem);
         }
     }
 }

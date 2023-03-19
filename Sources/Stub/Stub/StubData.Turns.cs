@@ -23,29 +23,22 @@ namespace Stub
                 => this.parent = parent;
 
             public Task<Turn?> AddItem(Turn? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.Turns.AddItem(item);
 
             public Task<bool> DeleteItem(Turn? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.Turns.DeleteItem(item);
 
             public Task<IEnumerable<Turn?>> GetItems(int index, int count, string? orderingPropertyName = null, bool descending = false)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.Turns.GetItemsWithFilterAndOrdering(
+                    t => true,
+                    index, count,
+                    orderingPropertyName, descending);
 
             public Task<int> GetNbItems()
-            {
-                throw new NotImplementedException();
-            }
+                => Task.FromResult(parent.Turns.Count());
 
             public Task<Turn?> UpdateItem(Turn? oldItem, Turn? newItem)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.Turns.UpdateItem(oldItem, newItem);
         }
     }
 }

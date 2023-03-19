@@ -28,10 +28,10 @@ namespace Stub
                 => parent.players.AddItem(item);
 
             public Task<bool> DeleteItem(Player? item)
-             => parent.players.DeleteItem(item);
+                => parent.players.DeleteItem(item);
 
             public Task<IEnumerable<Player?>> GetItems(int index, int count, string? orderingPropertyName = null, bool descending = false)
-            => parent.players.GetItemsWithFilterAndOrdering(
+                => parent.players.GetItemsWithFilterAndOrdering(
                         c => true,
                         index, count,
                         orderingPropertyName, descending);
@@ -40,14 +40,14 @@ namespace Stub
                 => Task.FromResult(parent.players.Count());
 
             public Task<Player?> UpdateItem(Player? oldItem, Player? newItem)
-             => parent.players.UpdateItem(oldItem, newItem);
+                => parent.players.UpdateItem(oldItem, newItem);
 
             private Func<Player, string, bool> filterByPseudo = (player, substring) => player.Pseudo.Contains(substring, StringComparison.InvariantCultureIgnoreCase);
             private Func<Player, int, bool> filterById = (player, id) => player.Id.Equals(id);
 
 
             public Task<IEnumerable<Player?>> GetItemsByPseudo(string charPseudo, int index, int count, string? orderingPropertyName, bool descending = false)
-               => parent.players.GetItemsWithFilterAndOrdering(player => filterByPseudo(player, charPseudo), index, count, orderingPropertyName, descending);
+                => parent.players.GetItemsWithFilterAndOrdering(player => filterByPseudo(player, charPseudo), index, count, orderingPropertyName, descending);
 
             public Task<int> GetNbItemsByPseudo(string charPseudo)
             {

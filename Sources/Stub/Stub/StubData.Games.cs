@@ -23,55 +23,88 @@ namespace Stub
             public GamesManager(StubData parent)
                 => this.parent = parent;
 
-            Task<bool> IGamesManager.AddCaseValueToPlayer(int id, int value, int index)
+            Task<bool> IGamesManager.AddCaseValueToPlayer(int idGame, int idPlayer, int value, int index)
             {
-                throw new NotImplementedException();
-            }
-
-            Task<Game?> IGenericDataManager<Game?>.AddItem(Game? item)
-            {
-                throw new NotImplementedException();
+                var game = parent.games.FirstOrDefault(g => g.Id == idGame);
+                if(game == null)
+                {
+                    return Task.FromResult(false);
+                }
+                var player = game.Players.FirstOrDefault(p => p.Id == idPlayer);
+                if(player == null)
+                {
+                    return Task.FromResult(false);
+                }
+                game.AddCaseValueToPlayer(player, value, index);
+                return Task.FromResult(true);
             }
 
             Task<bool> IGamesManager.AddPlayer(Player player)
             {
-                throw new NotImplementedException();
+                var game = parent.games.FirstOrDefault();
+                if(game == null)
+                {
+                    return Task.FromResult(false) ;
+                }
+                game.Players.AddItem(player);
+                return Task.FromResult(true);
             }
 
-            Task<bool> IGamesManager.AddScoreToPlayer(int id, int score)
+            Task<bool> IGamesManager.AddScoreToPlayer(int idGame, int idPlayer, int score)
             {
-                throw new NotImplementedException();
+                var game = parent.games.FirstOrDefault(g => g.Id == idGame);
+                if( game == null)
+                {
+                    return Task.FromResult(false);
+                }
+                var player = game.Players.FirstOrDefault(p => p.Id == idPlayer);
+                if(player == null)
+                {
+                    return Task.FromResult(false);
+                }
+                game.AddScoreToPlayer(player, score);
+                return Task.FromResult(true);
             }
 
             Task<bool> IGamesManager.AddTime(TimeSpan time)
             {
-                throw new NotImplementedException();
+                var game = parent.games.FirstOrDefault();
+                if (game == null)
+                {
+                    return Task.FromResult(false);
+                }
+                game.AddTime(time);
+                return Task.FromResult(true);
             }
 
             Task<bool> IGamesManager.AddTurn(Turn turn)
             {
-                throw new NotImplementedException();
+                var game = parent.games.FirstOrDefault();
+                if( game == null)
+                {
+                    return Task.FromResult(false);
+                }
+                game.AddTurn(turn);
+                return Task.FromResult(true);
             }
+
+            Task<Game?> IGenericDataManager<Game?>.AddItem(Game? item)
+                => parent.games.AddItem(item);
 
             Task<bool> IGenericDataManager<Game?>.DeleteItem(Game? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.games.DeleteItem(item);
 
             Task<IEnumerable<Game?>> IGenericDataManager<Game?>.GetItems(int index, int count, string? orderingPropertyName, bool descending)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.games.GetItemsWithFilterAndOrdering(
+                    g => true,
+                    index, count,
+                    orderingPropertyName, descending);
 
             Task<int> IGenericDataManager<Game?>.GetNbItems()
-            {
-                throw new NotImplementedException();
-            }
+                => Task.FromResult(parent.games.Count());
 
             Task<Game?> IGenericDataManager<Game?>.UpdateItem(Game? oldItem, Game? newItem)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.games.UpdateItem(oldItem, newItem);
         }
     }
 }

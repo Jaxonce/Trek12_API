@@ -30,11 +30,10 @@ namespace Model
     public interface IGamesManager : IGenericDataManager<Game?>
     {
         Task<bool> AddPlayer(Player player);
-        Task<bool> AddScoreToPlayer(int id, int score);
-        Task<bool> AddCaseValueToPlayer(int id, int value, int index);
+        Task<bool> AddScoreToPlayer(int idGame, int idPlayer, int score);
+        Task<bool> AddCaseValueToPlayer(int idGame, int idPlayer, int value, int index);
         Task<bool> AddTurn(Turn turn);
         Task<bool> AddTime(TimeSpan time);
-
     }
 
     public interface IGamesModeManager : IGenericDataManager<GameMode?>

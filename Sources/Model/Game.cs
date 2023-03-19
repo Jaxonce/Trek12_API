@@ -12,9 +12,11 @@ namespace Model
         public int Id { get; set; }
 
         public TimeSpan Duration { get; set; }
+
         public DateOnly Date { get; set; }
-        //public ReadOnlyCollection<Player> Players { get; private set; }
-        //private List<Player> players = new();
+
+        public ReadOnlyCollection<Player> Players { get; private set; }
+        private List<Player> players = new();
 
         public ReadOnlyCollection<Turn> Turns { get; private set; }
         private List<Turn> turns = new();
@@ -43,6 +45,7 @@ namespace Model
         public Game(DateOnly date, Player owner, GameMode gameMode, int id = 0)
         {
             Date = date;
+            Players = new ReadOnlyCollection<Player>(players);
             Grilles = new ReadOnlyDictionary<Player, Grille>(grilles);
             Scores = new ReadOnlyDictionary<Player, int>(scores);
             Turns = new ReadOnlyCollection<Turn>(turns);
@@ -50,7 +53,6 @@ namespace Model
             scores.Add(owner, 0);
             GameMode = gameMode;
             Id = id;
-
         }
 
         public bool AddPlayerToGame(Player player)
@@ -74,7 +76,7 @@ namespace Model
             return false;
         }
 
-        public bool AddCaseValue(Player player, int value, int index)
+        public bool AddCaseValueToPlayer(Player player, int value, int index)
         {
             if (grilles.ContainsKey(player) == true && scores.ContainsKey(player) == true)
             {
