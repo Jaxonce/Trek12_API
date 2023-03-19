@@ -31,7 +31,7 @@ namespace Trek12_API.Controllers
 
         //}
 
-        [HttpGet]
+        [HttpGet ("/AllPlayers")]
         public async Task<IActionResult> Get()
         {
             try
@@ -49,15 +49,16 @@ namespace Trek12_API.Controllers
         }
 
 
-        [HttpGet("players/{pseudo}")]
-        public async Task<IActionResult> GetByPseudo([FromRoute] string pseudo, int index, int count, string? order = null, bool descending = false)
+        [HttpGet("/PlayerByPseudo/{pseudo}")]
+        
+        public async Task<IActionResult> GetByPseudo([FromRoute] string pseudo)
         {
-            var player = await playersManager.GetItemsByPseudo(pseudo, index, count, order, descending);
+            var player = await playersManager.GetItemsByPseudo(pseudo);
             return Ok(player?.toDTOs());
         }
 
-        [HttpGet("players/{id}")]
-        public async Task<IActionResult> GetById([FromRoute] int id, int index, int count, string? order = null, bool descending = false)
+        [HttpGet ("/PlayerById/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var player = await playersManager.GetItemsById(id);
             return Ok(player?.toDTOs());

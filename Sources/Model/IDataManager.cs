@@ -20,7 +20,7 @@ namespace Model
 
 	public interface IPlayersManager : IGenericDataManager<Player?>
 	{
-        Task<IEnumerable<Player?>> GetItemsByPseudo(string charPseudo, int index, int count, string? orderingPropertyName, bool descending = false);
+        Task<IEnumerable<Player?>> GetItemsByPseudo(string charPseudo);
         Task<int> GetNbItemsByPseudo(string charPseudo);
 
         Task<IEnumerable<Player?>> GetItemsById(int id);        
