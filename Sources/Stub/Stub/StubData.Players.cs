@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Stub.StubData;
 
 namespace Stub
 {
@@ -46,8 +47,8 @@ namespace Stub
             private Func<Player, int, bool> filterById = (player, id) => player.Id.Equals(id);
 
 
-            public Task<IEnumerable<Player?>> GetItemsByPseudo(string charPseudo, int index, int count, string? orderingPropertyName, bool descending = false)
-                => parent.players.GetItemsWithFilterAndOrdering(player => filterByPseudo(player, charPseudo), index, count, orderingPropertyName, descending);
+            public Task<IEnumerable<Player?>> GetItemsByPseudo(string charPseudo)
+                => parent.players.GetItemsWithFilterAndOrdering<Player>(player => filterByPseudo(player, charPseudo), 0, parent.players.Count());
 
             public Task<int> GetNbItemsByPseudo(string charPseudo)
             {
