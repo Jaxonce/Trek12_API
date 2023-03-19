@@ -37,12 +37,14 @@ namespace Stub
                         orderingPropertyName, descending);
 
             public Task<int> GetNbItems()
-                => Task.FromResult(parent.players.Count);
+                => Task.FromResult(parent.players.Count());
 
             public Task<Player?> UpdateItem(Player? oldItem, Player? newItem)
              => parent.players.UpdateItem(oldItem, newItem);
 
             private Func<Player, string, bool> filterByPseudo = (player, substring) => player.Pseudo.Contains(substring, StringComparison.InvariantCultureIgnoreCase);
+            private Func<Player, int, bool> filterById = (player, id) => player.Id.Equals(id);
+
 
             public Task<IEnumerable<Player?>> GetItemsByPseudo(string charPseudo, int index, int count, string? orderingPropertyName, bool descending = false)
                => parent.players.GetItemsWithFilterAndOrdering(player => filterByPseudo(player, charPseudo), index, count, orderingPropertyName, descending);
@@ -50,6 +52,11 @@ namespace Stub
             public Task<int> GetNbItemsByPseudo(string charPseudo)
             {
                 throw new NotImplementedException();
+            }
+
+            public Task<IEnumerable<Player?>> GetItemsById(int id)
+            {
+                return parent.players.GetItemsWithFilterAndOrdering<Player>(player => filterById(player, id), 0, 1);
             }
         }
     }

@@ -32,44 +32,34 @@ namespace Trek12_API.Controllers
         //}
 
         [HttpGet]
-        public async Task<IActionResult> Get(int index, int count, string? order = null, bool descending = false)
+        public async Task<IActionResult> Get()
         {
             try
             {
-                if (index < 0)
-                {
-                    _logger.LogWarning($"Invalid index value {index} in Get method.");
-                    return BadRequest("Index must be a non-negative integer.");
-                }
-                if (count <= 0)
-                {
-                    _logger.LogWarning($"Invalid count value {count} in Get method.");
-                    return BadRequest("Count must be a positive integer.");
-                }
 
-                var list = await playersManager.GetItems(index, count, order, descending);
+                var list = await playersManager.GetItems(0, playersManager.GetNbItems().Result);
+                return Ok(list);
 
-                if (list == null || !list.Any())
-                {
-                    _logger.LogWarning($"No players found in Get method with index {index} and count {count}.");
-                    return NotFound("No players found.");
-                }
-
-                _logger.LogInformation($"Returning list of {list.Count()} players in Get method with index {index} and count {count}.");
-                return Ok(list.Select(player => player?.toDTO()));
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error occurred in Get method with index {index} and count {count}: {ex.Message}");
+                _logger.LogError($"Error: {ex.Message}");
                 return StatusCode(500, "Internal server error.");
             }
         }
 
 
-        [HttpGet("pseudo/{pseudo}")]
+        [HttpGet("players/{pseudo}")]
         public async Task<IActionResult> GetByPseudo([FromRoute] string pseudo, int index, int count, string? order = null, bool descending = false)
         {
             var player = await playersManager.GetItemsByPseudo(pseudo, index, count, order, descending);
+            return Ok(player?.toDTOs());
+        }
+
+        [HttpGet("players/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id, int index, int count, string? order = null, bool descending = false)
+        {
+            var player = await playersManager.GetItemsById(id);
             return Ok(player?.toDTOs());
         }
 
@@ -99,15 +89,14 @@ namespace Trek12_API.Controllers
             return Ok();
         }
 
-        [HttpPut("name=Update")]
-        public async Task<IActionResult> Update(string pseudo, PlayerDTO playerOld)
-        {
-            Player playerOldModel = playerOld.toModel();
-            Player playerNew = new Player(pseudo, playerOldModel.Stats);
-            await playersManager.UpdateItem(playerOldModel, playerNew);
-            return Ok(playerNew);
-        }
 
+        [HttpPut(Name= "UpdatePlayer")]
+        public async Task<IActionResult> Update(int id, PlayerDTO newPlayer)
+        {
+            await playersManager.UpdateItem(playersManager.GetItems(0,1).Result.FirstOrDefault(), newPlayer.toModel());
+            return Ok(newPlayer);
+        }
+/*
         [HttpPut("name=UpdateMaxChain")]
         public async Task<IActionResult> UpdateMaxChain(int newMaxChain, PlayerDTO playerOld)
         {
@@ -146,6 +135,6 @@ namespace Trek12_API.Controllers
             playerNew.AddWin();
             await playersManager.UpdateItem(playerOldModel, playerNew);
             return Ok(playerNew);
-        }
+        }*/
     }
 }
