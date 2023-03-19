@@ -23,14 +23,10 @@ namespace Stub
                 => this.parent = parent;
 
             public Task<Stats?> AddItem(Stats? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.stats.AddItem(item);
 
             public Task<bool> DeleteItem(Stats? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.stats.DeleteItem(item);
 
             public Task<IEnumerable<Stats?>> GetItems(int index, int count, string? orderingPropertyName = null, bool descending = false)
             => parent.stats.GetItemsWithFilterAndOrdering(
@@ -39,14 +35,10 @@ namespace Stub
                         orderingPropertyName, descending);
 
             public Task<int> GetNbItems()
-            {
-                throw new NotImplementedException();
-            }
+                => Task.FromResult(parent.stats.Count());
 
             public Task<Stats?> UpdateItem(Stats? oldItem, Stats? newItem)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.stats.UpdateItem(oldItem, newItem);
         }
     }
 }

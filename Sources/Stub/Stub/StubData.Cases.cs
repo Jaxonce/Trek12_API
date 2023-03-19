@@ -27,29 +27,22 @@ namespace Stub
                 => this.parent = parent;
 
             public Task<Case?> AddItem(Case? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.Cases.AddItem(item);
 
             public Task<bool> DeleteItem(Case? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.Cases.DeleteItem(item);
 
             public Task<IEnumerable<Case?>> GetItems(int index, int count, string? orderingPropertyName = null, bool descending = false)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.Cases.GetItemsWithFilterAndOrdering(
+                    c => true,
+                    index, count, 
+                    orderingPropertyName, descending);
 
             public Task<int> GetNbItems()
-            {
-                throw new NotImplementedException();
-            }
+                => Task.FromResult(parent.Cases.Count());
 
             public Task<Case?> UpdateItem(Case? oldItem, Case? newItem)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.Cases.UpdateItem(oldItem, newItem);
         }
     }
 }

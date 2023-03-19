@@ -34,7 +34,7 @@ namespace Stub
         {
             if (item == null || collection.Contains(item))
             {
-                return Task.FromResult<T?>(default(T));
+                return Task.FromResult(default(T));
             }
             collection.Add(item);
             return Task.FromResult<T?>(item);

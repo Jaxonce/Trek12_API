@@ -23,29 +23,22 @@ namespace Stub
                 => this.parent = parent;
 
             public Task<GameMode?> AddItem(GameMode? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.GamesMode.AddItem(item);
 
             public Task<bool> DeleteItem(GameMode? item)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.GamesMode.DeleteItem(item);
 
             public Task<IEnumerable<GameMode?>> GetItems(int index, int count, string? orderingPropertyName = null, bool descending = false)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.GamesMode.GetItemsWithFilterAndOrdering(
+                    g => true,
+                    index, count,
+                    orderingPropertyName, descending);
 
             public Task<int> GetNbItems()
-            {
-                throw new NotImplementedException();
-            }
+                => Task.FromResult(parent.GamesMode.Count());
 
             public Task<GameMode?> UpdateItem(GameMode? oldItem, GameMode? newItem)
-            {
-                throw new NotImplementedException();
-            }
+                => parent.GamesMode.UpdateItem(oldItem, newItem);
         }
     }
 }
