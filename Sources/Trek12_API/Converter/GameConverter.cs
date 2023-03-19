@@ -8,7 +8,7 @@ namespace Trek12_API.Converter
     {
         public static GameDTO toDTO(this Game game) 
         {
-            var gameDTO = new GameDTO(game.Id, game.Date, game.Player.toDTO(), game.GameMode.toDTO());
+            var gameDTO = new GameDTO(game.Id, game.Date, game.Players.toDTOs().First(), game.GameMode.toDTO());
             gameDTO.Duration = game.Duration;
             gameDTO.Date = game.Date;
             gameDTO.Turns = new List<TurnDTO>();

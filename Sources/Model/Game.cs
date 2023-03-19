@@ -51,6 +51,7 @@ namespace Model
             Turns = new ReadOnlyCollection<Turn>(turns);
             grilles.Add(owner, new Grille());
             scores.Add(owner, 0);
+            players.Add(owner);
             GameMode = gameMode;
             Id = id;
         }
