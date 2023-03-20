@@ -65,12 +65,12 @@ namespace Trek12_API.Controllers
         public async Task<IActionResult> Delete(int idPlayer)
         {
             var playerToDelete = await playersManager.GetItemsById(idPlayer);
-            if (playerToDelete == null)
+            if(playerToDelete == null)
             {
                 return NotFound("Joueur non trouvé");
             }
 
-            if (!await playersManager.DeleteItem(playerToDelete.SingleOrDefault(p => p.Id == idPlayer)))
+            if(!await playersManager.DeleteItem(playerToDelete.SingleOrDefault(p => p.Id == idPlayer)))
             {
                 return BadRequest("Erreur lors de la suppression du joueur");
             }

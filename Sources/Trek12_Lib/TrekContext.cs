@@ -10,6 +10,16 @@ namespace EntityFrameWorkLib
     {
         public DbSet<PlayerEntity> Players { get; set; }
 
+        public DbSet<GameEntity> Game { get; set; }
+
+        public DbSet<GrilleEntity> Grille { get; set; }
+
+        public DbSet<CaseEntity> Case { get; set; }
+
+        public DbSet<TurnEntity> Turn { get; set; }
+
+        public DbSet<ScoreEntity> Score { get; set; }
+
         public TrekContext() { }
         public TrekContext(DbContextOptions<TrekContext> options)
             : base(options)
@@ -18,21 +28,35 @@ namespace EntityFrameWorkLib
         {
             if (!options.IsConfigured)
             {
-                base.OnConfiguring(options.UseSqlite($"DataSource=projet.Players.db"));
+                base.OnConfiguring(options.UseSqlite($"DataSource=projet.AllTables.db"));
             }
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Définition de la clé primaire de PlayerEntity
             modelBuilder.Entity<PlayerEntity>().HasKey(n => n.PlayerId);
+            //Définition de la clé primaire de GameEntity
+            modelBuilder.Entity<GameEntity>().HasKey(n => n.GameId);
+            //Définition de la clé primaire de GrilleEntity
+            modelBuilder.Entity<GrilleEntity>().HasKey(n => n.GrilleId);
+            //Définition de la clé primaire de CaseEntity
+            modelBuilder.Entity<CaseEntity>().HasKey(n => n.CaseId);
+            //Définition de la clé primaire de TurnEntity
+            modelBuilder.Entity<TurnEntity>().HasKey(n => n.TurnId);
+            //Définition de la clé primaire de ScoreEntity
+            modelBuilder.Entity<ScoreEntity>().HasKey(n => n.ScoreId);
             //Définition du mode de generation de la clé : génération à l'insertion
             modelBuilder.Entity<PlayerEntity>().Property(n => n.PlayerId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<GameEntity>().Property(n => n.GameId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<GrilleEntity>().Property(n => n.GrilleId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<CaseEntity>().Property(n => n.CaseId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<TurnEntity>().Property(n => n.TurnId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<ScoreEntity>().Property(n => n.ScoreId).ValueGeneratedOnAdd();
 
             base.OnModelCreating(modelBuilder);
-
         }
-
     }
 }
 
