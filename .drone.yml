@@ -54,7 +54,7 @@ steps:
        dockerfile: Sources/Trek12_API/Dockerfile
        context: Sources/
        registry: hub.codefirst.iut.uca.fr
-       repo: hub.codefirst.iut.uca.fr/Trek_Prod/Trek12_API
+       repo: hub.codefirst.iut.uca.fr/trek_prod/trek12_api
        username:
          from_secret: SECRET_REGISTRY_USERNAME
        password:
@@ -64,7 +64,7 @@ steps:
   - name: deploy-container
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
-        IMAGENAME: hub.codefirst.iut.uca.fr/Trek_Prod/Trek12_API:latest
+        IMAGENAME: hub.codefirst.iut.uca.fr/trek_prod/trek12_api:latest
         CONTAINERNAME: trek12api
         COMMAND: create
         OVERWRITE: true
