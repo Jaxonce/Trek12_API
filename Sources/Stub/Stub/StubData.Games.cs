@@ -3,6 +3,7 @@ using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,11 @@ namespace Stub
 
             public GamesManager(StubData parent)
                 => this.parent = parent;
+
+            private Func<Game, int, bool> filterById = (game, id) => game.Id.Equals(id);
+
+
+
 
             public Task<bool> AddCaseValueToPlayer(int idGame, int idPlayer, int value, int index)
             {
@@ -98,7 +104,7 @@ namespace Stub
             public Task<bool> DeleteItem(Game? item)
                 => parent.games.DeleteItem(item);
 
-            public Task<IEnumerable<Game?>> GetItems(int index, int count, string? orderingPropertyName, bool descending)
+            public Task<IEnumerable<Game?>> GetItems(int index, int count, string? orderingPropertyName, bool descending = false)
                 => parent.games.GetItemsWithFilterAndOrdering(
                     g => true,
                     index, count,
@@ -109,6 +115,13 @@ namespace Stub
 
             public Task<Game?> UpdateItem(Game? oldItem, Game? newItem)
                 => parent.games.UpdateItem(oldItem, newItem);
+
+            public Task<IEnumerable<Game?>> GetItemsById(int id)
+            {
+                return parent.games.GetItemsWithFilterAndOrdering<Game>(game => filterById(game, id), 0, 1);
+            }
+
         }
+
     }
 }

@@ -47,6 +47,8 @@ namespace Stub
             private Func<Player, int, bool> filterById = (player, id) => player.Id.Equals(id);
 
 
+
+
             public Task<IEnumerable<Player?>> GetItemsByPseudo(string charPseudo)
                 => parent.players.GetItemsWithFilterAndOrdering<Player>(player => filterByPseudo(player, charPseudo), 0, parent.players.Count());
 

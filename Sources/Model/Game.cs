@@ -42,7 +42,7 @@ namespace Model
         //    Id = id;
 
         //}
-        public Game(DateOnly date, Player owner, GameMode gameMode, int id = 0)
+        public Game(DateOnly date, Player ?owner, GameMode gameMode, int id = 0)
         {
             Date = date;
             Players = new ReadOnlyCollection<Player>(players);

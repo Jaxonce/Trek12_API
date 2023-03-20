@@ -6,7 +6,7 @@ trigger:
   event:
     - push
 
-
+ 
 steps:
   - name: build
     image: mcr.microsoft.com/dotnet/sdk:6.0
@@ -47,18 +47,29 @@ steps:
         from_secret: SECRET_SONAR_LOGIN
       depends on: [tests]
 
-  # docker image build
-  - name: docker-build-and-push
+   # docker image build
+  - name: docker-build
     image: plugins/docker
     settings:
-       dockerfile: Dockerfile
-       context: WebApiLol
+       dockerfile: Sources/Trek12_API/Dockerfile
+       context: Sources/
        registry: hub.codefirst.iut.uca.fr
-       repo: hub.codefirst.iut.uca.fr/maxence.lanone/EfCore_LoL_S4
+       repo: hub.codefirst.iut.uca.fr/Trek_Prod/Trek12_API
        username:
          from_secret: SECRET_REGISTRY_USERNAME
        password:
          from_secret: SECRET_REGISTRY_PASSWORD
+
+  # container deployment
+  - name: deploy-container
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+        IMAGENAME: hub.codefirst.iut.uca.fr/Trek_Prod/Trek12_API:latest
+        CONTAINERNAME: trek12api
+        COMMAND: create
+        OVERWRITE: true
+        ADMINS: maxencelanone, aurelienpintrand, theodupin, zakariyasaoula
+    depends_on: [ docker-build ]
 
 volumes:
 - name: docs

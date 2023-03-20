@@ -33,7 +33,13 @@ namespace Model
         Task<bool> AddScoreToPlayer(int idGame, int idPlayer, int score);
         Task<bool> AddCaseValueToPlayer(int idGame, int idPlayer, int value, int index);
         Task<bool> AddTurn(Turn turn);
+
         Task<bool> AddTime(TimeSpan time);
+
+       // Task<IEnumerable<Game?>> GetItemsById(int id);
+
+        
+
     }
 
     public interface IGamesModeManager : IGenericDataManager<GameMode?>
