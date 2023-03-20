@@ -11,12 +11,13 @@ namespace Trek12_API.DTO
         public List<TurnDTO> Turns { get; set; }
         public Dictionary<PlayerDTO, GrilleDTO> Grilles { get; set; }
         public Dictionary<PlayerDTO, int> Scores { get; set; }
+        public List<PlayerDTO> Players { get; set; }
         public GamemodeDTO GameMode { get; set; }
-        public PlayerDTO Player { get; set; }
 
-        public GameDTO(int id, DateOnly date, PlayerDTO owner, GamemodeDTO gameMode)
+/*        public GameDTO(int id, DateOnly date, PlayerDTO owner, GamemodeDTO gameMode)
         {
             Date = date;
+            Players = new List<PlayerDTO>();
             Grilles = new Dictionary<PlayerDTO, GrilleDTO>();
             Scores = new Dictionary<PlayerDTO, int>();
             Turns = new List<TurnDTO>();
@@ -24,7 +25,7 @@ namespace Trek12_API.DTO
             Scores.Add(owner, 0);
             GameMode = gameMode;
             Id = id;
-            Player = owner;
-        }
+            Players.Add(owner);
+        }*/
     }
 }

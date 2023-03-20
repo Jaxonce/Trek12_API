@@ -104,7 +104,7 @@ namespace Stub
             public Task<bool> DeleteItem(Game? item)
                 => parent.games.DeleteItem(item);
 
-            public Task<IEnumerable<Game?>> GetItems(int index, int count, string? orderingPropertyName, bool descending)
+            public Task<IEnumerable<Game?>> GetItems(int index, int count, string? orderingPropertyName, bool descending = false)
                 => parent.games.GetItemsWithFilterAndOrdering(
                     g => true,
                     index, count,
@@ -116,23 +116,10 @@ namespace Stub
             public Task<Game?> UpdateItem(Game? oldItem, Game? newItem)
                 => parent.games.UpdateItem(oldItem, newItem);
 
-            /*public Task<IEnumerable<Game?>> GetItemsById(int idPlayer)
+            public Task<IEnumerable<Game?>> GetItemsById(int id)
             {
-                var Task<>
-
-                foreach (var game in parent.games)
-                {
-                    foreach (var player in game.Players)
-                    {
-                        if (player.Id == idPlayer)
-                        {
-
-                        }
-                    }
-                    return false;
-                }*/
-     
-               // return parent.games.GetItemsWithFilterAndOrdering<Game>(game => filterById(game, id), 0, 1);
+                return parent.games.GetItemsWithFilterAndOrdering<Game>(game => filterById(game, id), 0, 1);
+            }
 
         }
 

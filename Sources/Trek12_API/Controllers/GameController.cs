@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Model;
 using Stub;
+using Trek12_API.DTO;
+using static Stub.StubData;
 
 namespace Trek12_API.Controllers
 {
@@ -31,8 +34,8 @@ namespace Trek12_API.Controllers
             }
         }
 
-/*        [HttpGet("/GameById")]
-        public async Task<IActionResult> GetGameById(int id)
+        [HttpGet("/GameById/{id}")]
+        public async Task<IActionResult> GetGameById([FromRoute] int id)
         {
             try
             {
@@ -44,16 +47,29 @@ namespace Trek12_API.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }*/
-
-        /*
-        [HttpGet("/GameByPlayer")]
-        public async Task<IActionResult> GetGamesByPlayer()
+        }
+        [HttpDelete (Name = "DeleteGameById")]
+        public async Task<IActionResult> DeleteGame(int idGame)
         {
-            try
+            var gameToDelete = await gamesManager.GetItemsById(idGame);
+            if (gameToDelete == null)
             {
-                var games = await gamesManager.GetItems(0, gamesManager)
+                return NotFound("Partie non trouvée");
             }
+
+            if (!await gamesManager.DeleteItem(gameToDelete.SingleOrDefault(game => game.Id == idGame)))
+            {
+                return BadRequest("Erreur lors de la suppression de la partie");
+            }
+
+            return Ok("Partie bien supprimée");
+        }
+
+/*        [HttpPut(Name = "UpdateGameById")]
+        public async Task<IActionResult> Update(int id, GameDTO newGame)
+        {
+            await gamesManager.UpdateItem(gamesManager.GetItemsById(id).Result.FirstOrDefault(), newGame.toModel());
+            return Ok(newPlayer);
         }*/
     }
 }
