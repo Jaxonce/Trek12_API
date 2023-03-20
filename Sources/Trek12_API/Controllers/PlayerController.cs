@@ -50,6 +50,7 @@ namespace Trek12_API.Controllers
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var player = await playersManager.GetItemsById(id);
+            if (player == null) return NotFound("Joueur non trouvé"); 
             return Ok(player?.toDTOs());
         }
 
