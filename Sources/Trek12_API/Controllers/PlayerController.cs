@@ -72,26 +72,25 @@ namespace Trek12_API.Controllers
             return Ok(playerToCreate?.toDTO());
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(PlayerDTO player)
+        [HttpDelete(Name= "DeletePlayerById")]
+        public async Task<IActionResult> Delete(int idPlayer)
         {
-            var playerToDelete = player.toModel();
-            //faire recherche pour voir si player existe
-            await playersManager.DeleteItem(playerToDelete);
-            return Ok();
+            var playerToDelete = await playersManager.GetItemsById(idPlayer);
+            if (playerToDelete == null)
+            {
+                return NotFound("Joueur non trouvé");
+            }
+
+            if (!await playersManager.DeleteItem(playerToDelete.SingleOrDefault(p => p.Id == idPlayer)))
+            {
+                return BadRequest("Erreur lors de la suppression du joueur");
+            }
+
+            return Ok("Joueur bien supprimé");
         }
 
-        [HttpDelete("pseudo/{pseudo}")]
-        public async Task<IActionResult> DeleteByPseudo(PlayerDTO player)
-        {
-            var playerToDelete = player.toModel();
-            //faire recherche pour voir si player existe
-            await playersManager.DeleteItem(playerToDelete);
-            return Ok();
-        }
 
-
-        [HttpPut(Name= "UpdatePlayer")]
+        [HttpPut(Name= "UpdatePlayerById")]
         public async Task<IActionResult> Update(int id, PlayerDTO newPlayer)
         {
             await playersManager.UpdateItem(playersManager.GetItems(0,1).Result.FirstOrDefault(), newPlayer.toModel());
