@@ -12,8 +12,12 @@ namespace Stub
     {
         private List<Game> games = new()
         {
-            //new Game(new TimeSpan(1,20,0),new DateOnly(2023,06,03)),
-            //new Game(),
+            new Game(new DateOnly(2023,06,03), new Player("test1"),new GameMode("gamemode test1")),
+            new Game(new DateOnly(2023,06,03), new Player("test2"),new GameMode("gamemode test2")),
+            new Game(new DateOnly(2023,06,03), new Player("test3"),new GameMode("gamemode test3")),
+            new Game(new DateOnly(2023,06,03), new Player("test4"),new GameMode("gamemode test4")),
+            new Game(new DateOnly(2023,06,03), new Player("test5"),new GameMode("gamemode test5")),
+
         };
 
         public class GamesManager : IGamesManager
@@ -23,7 +27,7 @@ namespace Stub
             public GamesManager(StubData parent)
                 => this.parent = parent;
 
-            Task<bool> IGamesManager.AddCaseValueToPlayer(int idGame, int idPlayer, int value, int index)
+            public Task<bool> IGamesManager.AddCaseValueToPlayer(int idGame, int idPlayer, int value, int index)
             {
                 var game = parent.games.FirstOrDefault(g => g.Id == idGame);
                 if(game == null)
@@ -39,7 +43,7 @@ namespace Stub
                 return Task.FromResult(true);
             }
 
-            Task<bool> IGamesManager.AddPlayer(Player player)
+            public Task<bool> IGamesManager.AddPlayer(Player player)
             {
                 var game = parent.games.FirstOrDefault();
                 if(game == null)
@@ -50,7 +54,7 @@ namespace Stub
                 return Task.FromResult(true);
             }
 
-            Task<bool> IGamesManager.AddScoreToPlayer(int idGame, int idPlayer, int score)
+            public Task<bool> IGamesManager.AddScoreToPlayer(int idGame, int idPlayer, int score)
             {
                 var game = parent.games.FirstOrDefault(g => g.Id == idGame);
                 if( game == null)
@@ -66,7 +70,7 @@ namespace Stub
                 return Task.FromResult(true);
             }
 
-            Task<bool> IGamesManager.AddTime(TimeSpan time)
+            public Task<bool> IGamesManager.AddTime(TimeSpan time)
             {
                 var game = parent.games.FirstOrDefault();
                 if (game == null)
@@ -77,7 +81,7 @@ namespace Stub
                 return Task.FromResult(true);
             }
 
-            Task<bool> IGamesManager.AddTurn(Turn turn)
+            public Task<bool> IGamesManager.AddTurn(Turn turn)
             {
                 var game = parent.games.FirstOrDefault();
                 if( game == null)
@@ -88,22 +92,22 @@ namespace Stub
                 return Task.FromResult(true);
             }
 
-            Task<Game?> IGenericDataManager<Game?>.AddItem(Game? item)
+            public Task<Game?> IGenericDataManager<Game?>.AddItem(Game? item)
                 => parent.games.AddItem(item);
 
-            Task<bool> IGenericDataManager<Game?>.DeleteItem(Game? item)
+            public Task<bool> IGenericDataManager<Game?>.DeleteItem(Game? item)
                 => parent.games.DeleteItem(item);
 
-            Task<IEnumerable<Game?>> IGenericDataManager<Game?>.GetItems(int index, int count, string? orderingPropertyName, bool descending)
+            public Task<IEnumerable<Game?>> IGenericDataManager<Game?>.GetItems(int index, int count, string? orderingPropertyName, bool descending)
                 => parent.games.GetItemsWithFilterAndOrdering(
                     g => true,
                     index, count,
                     orderingPropertyName, descending);
 
-            Task<int> IGenericDataManager<Game?>.GetNbItems()
+            public Task<int> IGenericDataManager<Game?>.GetNbItems()
                 => Task.FromResult(parent.games.Count());
 
-            Task<Game?> IGenericDataManager<Game?>.UpdateItem(Game? oldItem, Game? newItem)
+            public Task<Game?> IGenericDataManager<Game?>.UpdateItem(Game? oldItem, Game? newItem)
                 => parent.games.UpdateItem(oldItem, newItem);
         }
     }

@@ -20,23 +20,12 @@ namespace Trek12_API.Controllers
             _logger = logger;
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Get(int index, int count, string? order = null, bool descending = false )
-        //{
-        //    //si count > nb_max
-        //    //_logger.LogWarning + reaffecter count
-        //    //var list = await playersManager.GetItems(0, await playersManager.GetNbItems(), order, descending);
-        //    var list = await playersManager.GetItems(index, count, order, descending);
-        //    return Ok(list.Select(player => player?.toDTO()));
-
-        //}
 
         [HttpGet ("/AllPlayers")]
         public async Task<IActionResult> Get()
         {
             try
             {
-
                 var list = await playersManager.GetItems(0, playersManager.GetNbItems().Result);
                 return Ok(list);
 
@@ -96,45 +85,5 @@ namespace Trek12_API.Controllers
             await playersManager.UpdateItem(playersManager.GetItems(0,1).Result.FirstOrDefault(), newPlayer.toModel());
             return Ok(newPlayer);
         }
-/*
-        [HttpPut("name=UpdateMaxChain")]
-        public async Task<IActionResult> UpdateMaxChain(int newMaxChain, PlayerDTO playerOld)
-        {
-            Player playerOldModel = playerOld.toModel();
-            Player playerNew = new Player(playerOldModel.Pseudo, playerOldModel.Stats);
-            playerNew.Stats.MaxChain = newMaxChain;
-            await playersManager.UpdateItem(playerOldModel, playerNew);
-            return Ok(playerNew);
-        }
-
-        [HttpPut("name=UpdateMaxPoints")]
-        public async Task<IActionResult> UpdateMaxPoints(int newMaxPoints, PlayerDTO playerOld)
-        {
-            Player playerOldModel = playerOld.toModel();
-            Player playerNew = new Player(playerOldModel.Pseudo, playerOldModel.Stats);
-            playerNew.Stats.MaxPoints = newMaxPoints;
-            await playersManager.UpdateItem(playerOldModel, playerNew);
-            return Ok(playerNew);
-        }
-
-        [HttpPut("name=UpdateMaxZone")]
-        public async Task<IActionResult> UpdateMaxZone(int newMaxZone, PlayerDTO playerOld)
-        {
-            Player playerOldModel = playerOld.toModel();
-            Player playerNew = new Player(playerOldModel.Pseudo, playerOldModel.Stats);
-            playerNew.Stats.MaxZone = newMaxZone;
-            await playersManager.UpdateItem(playerOldModel, playerNew);
-            return Ok(playerNew);
-        }
-
-        [HttpPut("name=UpdateWin")]
-        public async Task<IActionResult> UpdateWin(int newMaxZone, PlayerDTO playerOld)
-        {
-            Player playerOldModel = playerOld.toModel();
-            Player playerNew = new Player(playerOldModel.Pseudo, playerOldModel.Stats);
-            playerNew.AddWin();
-            await playersManager.UpdateItem(playerOldModel, playerNew);
-            return Ok(playerNew);
-        }*/
     }
 }
