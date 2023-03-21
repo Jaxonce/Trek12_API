@@ -16,7 +16,7 @@ namespace Model
         public int MaxZone { get; set; }
 
         public ReadOnlyCollection<Case> Cases { get; private set; }
-        private List<Case> cases = new();
+        private List<Case> cases { get; set; }
 
 
         //public Grille(List<Case> cases)
@@ -26,13 +26,15 @@ namespace Model
 
         public Grille(List<Case> cases)
         {
+            this.cases = new();
             Cases = new ReadOnlyCollection<Case>(cases);
             cases.AddRange(Enumerable.Repeat(new Case(), 19));
         }
 
         public Grille()
         {
-
+            this.cases = new();
+            Cases = new ReadOnlyCollection<Case>(this.cases);
         }
 
         public bool AddValueToCase(int value, int index)

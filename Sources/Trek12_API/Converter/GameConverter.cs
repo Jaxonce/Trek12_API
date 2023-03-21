@@ -1,5 +1,4 @@
 ﻿using Model;
-using System.Collections.Generic;
 using Trek12_API.DTO;
 
 namespace Trek12_API.Converter
@@ -38,38 +37,36 @@ namespace Trek12_API.Converter
             return gameDTO;
         }
 
-        /*public static Game toModel(this GameDTO gameDTO)
+        public static Game toModel(this GameDTO gameDTO)
         {
             {
-                var game = new Game();
-                game.Duration = gameDTO.Duration;
-                game.Date = gameDTO.Date;
-                game.Turns = new List<Turn>();
-                foreach (var turn in game.Turns)
+                var turnsList = new List<Turn>();
+                foreach (var turn in gameDTO.Turns)
                 {
-                    gameDTO.Turns.Add(turn.toDTO());
+                    turnsList.Add(turn.toModel());
                 }
-                gameDTO.Grilles = new Dictionary<PlayerDTO, GrilleDTO>();
-                foreach (var grille in game.Grilles)
+
+                var playersList = new List<Player>();
+                foreach (var player in gameDTO.Players)
                 {
-                    gameDTO.Grilles.Add(grille.Key.toDTO(), grille.Value.toDTO());
+                    playersList.Add(player.toModel());
                 }
-                gameDTO.Scores = new Dictionary<PlayerDTO, int>();
-                foreach (var score in game.Scores)
+
+                var grillesDict = new Dictionary<Player, Grille>();
+                foreach (var (key, value) in gameDTO.Grilles)
                 {
-                    gameDTO.Scores.Add(score.Key.toDTO(), score.Value);
+                    grillesDict.Add(key.toModel(), value.toModel());
                 }
-                gameDTO.Players = new List<PlayerDTO>();
-                foreach (var player in game.Players)
+
+                var scoresDict = new Dictionary<Player, int>();
+                foreach (var (key, value) in gameDTO.Scores)
                 {
-                    gameDTO.Players.Add(player.toDTO());
+                    scoresDict.Add(key.toModel(), value);
                 }
-                gameDTO.GameMode = new GamemodeDTO()
-                {
-                    Id = game.GameMode.Id,
-                    Name = game.GameMode.Name
-                };
-                return gameDTO;
-            }*/
+
+                var game = new Game(gameDTO.Id, gameDTO.Duration, gameDTO.Date, playersList, turnsList, grillesDict, scoresDict, gameDTO.GameMode.toModel());
+                return game;
+            }
+        }
     }
 }

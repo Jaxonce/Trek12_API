@@ -13,5 +13,14 @@ namespace Trek12_API.Converter
                 Name = gameMode.Name,
             };
         }
+
+        public static GameMode toModel( this GamemodeDTO gamemode)
+        {
+            return new GameMode()
+            {
+                Id = gamemode.Id,
+                Name = gamemode.Name
+            };
+        }
     }
 }
