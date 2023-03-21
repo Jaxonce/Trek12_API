@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  trek12_api:
+    image: ${DOCKER_REGISTRY-}trek12api
+    build:
+      context: .
+      dockerfile: Trek12_API/Dockerfile

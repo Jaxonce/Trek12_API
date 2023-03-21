@@ -55,6 +55,26 @@ namespace EntityFrameWorkLib
             modelBuilder.Entity<TurnEntity>().Property(n => n.TurnId).ValueGeneratedOnAdd();
             modelBuilder.Entity<ScoreEntity>().Property(n => n.ScoreId).ValueGeneratedOnAdd();
 
+            //Configuration des clés primaires et étrangères pour la table Score
+            modelBuilder.Entity<ScoreEntity>()
+            .HasKey(s => s.ScoreId);
+
+            modelBuilder.Entity<GameEntity>()
+                .HasKey(g => g.GameId);
+
+            modelBuilder.Entity<PlayerEntity>()
+                .HasKey(p => p.PlayerId);
+
+            modelBuilder.Entity<ScoreEntity>()
+                .HasOne(s => s.Game)
+                .WithMany(g => g.Scores)
+                .HasForeignKey(s => s.GameId);
+
+            modelBuilder.Entity<ScoreEntity>()
+                .HasOne(s => s.Player)
+                .WithMany(p => p.Scores)
+                .HasForeignKey(s => s.PlayerId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

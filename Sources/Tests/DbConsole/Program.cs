@@ -1,32 +1,21 @@
 ﻿using EntityFrameWorkLib;
 using Microsoft.EntityFrameworkCore;
+using Model;
 
-PlayerEntity p1 = new PlayerEntity
+/*GameEntity g1 = new GameEntity
 {
-    PlayerId = 0,
+    GameId = 1,
+};*/
+
+/*PlayerEntity p1 = new PlayerEntity
+{
+    PlayerId = 1,
     Pseudo = "Jax",
     NbWin = 0,
     NbPlayed = 0,
     MaxZone = 0,
     MaxPoints = 0,
-    NbPoints = 0
-};
-
-GameEntity g1 = new GameEntity
-{
-    GameId = 1,
-};
-
-PlayerEntity p2 = new PlayerEntity
-{
-    PlayerId = 0,
-    Pseudo = "Theo",
-    NbWin = 0,
-    NbPlayed = 0,
-    MaxZone = 0,
-    MaxPoints = 0,
-    NbPoints = 0
-};
+};*/
 
 /*using (var context = new SQLiteContext())
 {
@@ -38,14 +27,35 @@ PlayerEntity p2 = new PlayerEntity
 
 using (var context = new SQLiteContext())
 {
-    var newScore = new ScoreEntity
+    var firstGame = new GameEntity
     {
         GameId = 1,
-        PlayerId = 2,
-        NbPoints = 5
+        Name = "First Game",
     };
-
-    context.Add(newScore);
+    var secondGame = new GameEntity
+    {
+        GameId = 2,
+        Name = "Second Game",
+    };
+    var thirdGame = new GameEntity
+    {
+        GameId = 3,
+        Name = "Third Game",
+    };
+    var newPlayer = new PlayerEntity
+    {
+        PlayerId = 2,
+        Pseudo = "Jax"
+    };
+    var scores = new List<ScoreEntity>
+    {
+        new ScoreEntity { GameId = 1, NbPointsTotal = 5 },
+        new ScoreEntity { GameId = 2, NbPointsTotal = 10 },
+        new ScoreEntity { GameId = 3, NbPointsTotal = 15 }
+    };
+    newPlayer.Scores = scores;
+    context.AddRange(firstGame, secondGame, thirdGame, newPlayer);
+    context.AddRange(scores);
     context.SaveChanges();
 }
 

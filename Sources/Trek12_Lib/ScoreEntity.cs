@@ -13,7 +13,7 @@ namespace EntityFrameWorkLib
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ScoreId { get; set; }
-        public int NbPoints { get; set; }
+        public int NbPointsTotal { get; set; }
 
         public int GameId { get; set; }
         [ForeignKey("GameId")]

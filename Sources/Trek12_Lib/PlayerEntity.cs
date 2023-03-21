@@ -14,7 +14,7 @@ namespace EntityFrameWorkLib
         public int NbPlayed { get; set; }
         public int MaxZone { get; set; }
         public int MaxPoints { get; set; }
-        public int NbPoints { get; set; }
+        public List<ScoreEntity> Scores { get; set; }
     }
 }
 

@@ -17,6 +17,7 @@ namespace EntityFrameWorkLib
         public DateOnly Date { get; set; }
         public int NbPlayers { get; set; }
         public string Name { get; set; }
-        //public ICollection<PlayerEntity> NbPoints { get; set; }
+
+        public List<ScoreEntity> Scores { get; set; }
     }
 }
