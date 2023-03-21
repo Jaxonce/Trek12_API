@@ -25,6 +25,7 @@ using Model;
     context.SaveChanges();
 }*/
 
+// Ajout de 3 Game, 1 Player "Jax" et 3 Scores totaux dans chaque Game attribués au Player par son Id
 using (var context = new SQLiteContext())
 {
     var firstGame = new GameEntity
