@@ -68,7 +68,7 @@ steps:
         CONTAINERNAME: trek12api
         COMMAND: create
         OVERWRITE: true
-        ADMINS: maxencelanone, aurelienpintrand, theodupin, zakariyasaoula
+        ADMINS: maxencelanone,aurelienpintrand,theodupin,zakariyasaoula
     depends_on: [ docker-build ]
 
 volumes:
