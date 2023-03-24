@@ -10,17 +10,12 @@ namespace EntityFrameWorkLib
 {
     public class ScoreEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ScoreId { get; set; }
         public int NbPointsTotal { get; set; }
-
-        public int GameId { get; set; }
         [ForeignKey("GameId")]
+        public int GameId { get; set; }
         public GameEntity Game { get; set; }
-
-        public int PlayerId { get; set; }
         [ForeignKey("PlayerId")]
+        public int PlayerId { get; set; }
         public PlayerEntity Player { get; set; }
     }
 }

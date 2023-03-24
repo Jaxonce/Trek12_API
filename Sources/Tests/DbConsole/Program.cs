@@ -1,6 +1,8 @@
 ﻿using EntityFrameWorkLib;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using Stub;
+
 
 /*GameEntity g1 = new GameEntity
 {
@@ -17,7 +19,7 @@ using Model;
     MaxPoints = 0,
 };*/
 
-/*using (var context = new SQLiteContext())
+/*using (var context = new TrekContext())
 {
     Console.WriteLine("Create and Insert new Player");
     context.Add(p1);
@@ -26,7 +28,7 @@ using Model;
 }*/
 
 // Ajout de 3 Game, 1 Player "Jax" et 3 Scores totaux dans chaque Game attribués au Player par son Id
-using (var context = new SQLiteContext())
+/*using (var context = new TrekContext())
 {
     var firstGame = new GameEntity
     {
@@ -58,15 +60,56 @@ using (var context = new SQLiteContext())
     context.AddRange(firstGame, secondGame, thirdGame, newPlayer);
     context.AddRange(scores);
     context.SaveChanges();
-}
+}*/
 
-public class SQLiteContext : TrekContext
+/*using(var context = new TrekContext())
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
+    var grille = new GrilleEntity
     {
-        if (!options.IsConfigured)
+        GrilleId = 1,
+        NbChains = 1,
+        NbZones = 4,
+        MaxChain = 20,
+        MaxZone = 25
+    };
+
+    var case1 = new CaseEntity
+    {
+        CaseId = 1,
+        Value = 5,
+        GrilleId = 1
+    };
+    var case2 = new CaseEntity
+    {
+        CaseId = 2,
+        Value = 10,
+        GrilleId = 1
+    };
+    var case3 = new CaseEntity
+    {
+        CaseId = 3,
+        Value = 12,
+        GrilleId = 1
+    };
+    context.AddRange(grille, case1, case2, case3);
+    context.SaveChanges();
+*/
+
+using (var context = new TrekContext())
+{
+    var grille = new GrilleEntity
+    {
+        GrilleId = 1,
+        Cases = new List<CaseEntity>
         {
-            options.UseSqlite($"Data Source=projet.ToutesTables.db");
+            new CaseEntity { CaseId = 1, GrilleId = 1, Value = 2  },
+            new CaseEntity { CaseId = 2, GrilleId = 1, Value = 5  },
+            new CaseEntity { CaseId = 3, GrilleId = 1, Value = 10  },
+            new CaseEntity { CaseId = 4, GrilleId = 1, Value = 12  },
+            new CaseEntity { CaseId = 5, GrilleId = 1, Value = 7  }
         }
-    }
+    };
+    context.Add(grille);
+    context.SaveChanges();
 }
+    

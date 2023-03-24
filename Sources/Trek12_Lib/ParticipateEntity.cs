@@ -8,15 +8,22 @@ using System.Threading.Tasks;
 
 namespace EntityFrameWorkLib
 {
-    public class CaseEntity 
-    { 
-
+    public class ParticipateEntity
+    {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CaseId { get; set; }
         [ForeignKey("GrilleId")]
         public int GrilleId { get; set; }
         public GrilleEntity Grille { get; set; }
-        public int Value { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [ForeignKey("GameId")]
+        public int GameId { get; set; }
+        public GameEntity Game { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [ForeignKey("PlayerId")]
+        public int PlayerId { get; set; }
+        public PlayerEntity Player { get; set; }
     }
 }

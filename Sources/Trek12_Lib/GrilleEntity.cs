@@ -17,5 +17,6 @@ namespace EntityFrameWorkLib
         public int NbZones { get; set; }
         public int MaxChain { get; set; }
         public int MaxZone { get; set; }
+        public List<CaseEntity> Cases { get; set; }
     }
 }

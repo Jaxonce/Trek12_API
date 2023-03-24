@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Model\Model.csproj" />
+    <ProjectReference Include="..\..\Stub\Stub\Stub.csproj" />
     <ProjectReference Include="..\..\Trek12_Lib\EntityFrameWorkLib.csproj" />
   </ItemGroup>
   <ItemGroup>

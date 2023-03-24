@@ -16,8 +16,8 @@ namespace EntityFrameWorkLib
         public TimeSpan Duration { get; set; }
         public DateOnly Date { get; set; }
         public int NbPlayers { get; set; }
-        public string Name { get; set; }
-
-        public List<ScoreEntity> Scores { get; set; }
+        public PlayerEntity Player { get; set; }
+        public string? Name { get; set; }
+        public List<ScoreEntity>? Scores { get; set; }
     }
 }

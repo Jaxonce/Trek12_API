@@ -45,25 +45,22 @@ namespace EntityFrameWorkLib
             modelBuilder.Entity<CaseEntity>().HasKey(n => n.CaseId);
             //Définition de la clé primaire de TurnEntity
             modelBuilder.Entity<TurnEntity>().HasKey(n => n.TurnId);
-            //Définition de la clé primaire de ScoreEntity
-            modelBuilder.Entity<ScoreEntity>().HasKey(n => n.ScoreId);
             //Définition du mode de generation de la clé : génération à l'insertion
             modelBuilder.Entity<PlayerEntity>().Property(n => n.PlayerId).ValueGeneratedOnAdd();
             modelBuilder.Entity<GameEntity>().Property(n => n.GameId).ValueGeneratedOnAdd();
             modelBuilder.Entity<GrilleEntity>().Property(n => n.GrilleId).ValueGeneratedOnAdd();
             modelBuilder.Entity<CaseEntity>().Property(n => n.CaseId).ValueGeneratedOnAdd();
             modelBuilder.Entity<TurnEntity>().Property(n => n.TurnId).ValueGeneratedOnAdd();
-            modelBuilder.Entity<ScoreEntity>().Property(n => n.ScoreId).ValueGeneratedOnAdd();
 
             //Configuration des clés primaires et étrangères pour la table Score
-            modelBuilder.Entity<ScoreEntity>()
-            .HasKey(s => s.ScoreId);
-
             modelBuilder.Entity<GameEntity>()
                 .HasKey(g => g.GameId);
 
             modelBuilder.Entity<PlayerEntity>()
                 .HasKey(p => p.PlayerId);
+
+            modelBuilder.Entity<ScoreEntity>()
+                .HasKey(s => new { s.GameId, s.PlayerId });
 
             modelBuilder.Entity<ScoreEntity>()
                 .HasOne(s => s.Game)
@@ -72,8 +69,17 @@ namespace EntityFrameWorkLib
 
             modelBuilder.Entity<ScoreEntity>()
                 .HasOne(s => s.Player)
-                .WithMany(p => p.Scores)
+                .WithMany()
                 .HasForeignKey(s => s.PlayerId);
+
+            // Configuration de la relation "one-to-many" entre GrilleEntity et CaseEntity
+            modelBuilder.Entity<GrilleEntity>()
+                .HasMany(g => g.Cases)
+                .WithOne(c => c.Grille)
+                .HasForeignKey(c => c.GrilleId);
+
+            //Configuration des clés primaires et étrangères pour la table Participate
+            
 
             base.OnModelCreating(modelBuilder);
         }
