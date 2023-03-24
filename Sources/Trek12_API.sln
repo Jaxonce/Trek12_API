@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csp
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7DF17583-2166-4ABE-82EE-F63CEE2132C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbDataManager", "..\DbDataManager\DbDataManager.csproj", "{BECCFECE-4BFE-49E6-BD8F-5A791180922C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{7DF17583-2166-4ABE-82EE-F63CEE2132C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DF17583-2166-4ABE-82EE-F63CEE2132C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DF17583-2166-4ABE-82EE-F63CEE2132C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECCFECE-4BFE-49E6-BD8F-5A791180922C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECCFECE-4BFE-49E6-BD8F-5A791180922C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECCFECE-4BFE-49E6-BD8F-5A791180922C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECCFECE-4BFE-49E6-BD8F-5A791180922C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
