@@ -13,11 +13,11 @@ namespace Stub
     {
         private List<Game> games = new()
         {
-            new Game(new DateOnly(2023,06,03), new Player("test1"),new GameMode("gamemode test1")),
-            new Game(new DateOnly(2023,06,03), new Player("test2"),new GameMode("gamemode test2")),
-            new Game(new DateOnly(2023,06,03), new Player("test3"),new GameMode("gamemode test3")),
-            new Game(new DateOnly(2023,06,03), new Player("test4"),new GameMode("gamemode test4")),
-            new Game(new DateOnly(2023,06,03), new Player("test5"),new GameMode("gamemode test5")),
+            new Game(new DateOnly(2023,06,03), new Player("test1"),new GameMode()),
+            new Game(new DateOnly(2023,06,03), new Player("test2"),new GameMode()),
+            new Game(new DateOnly(2023,06,03), new Player("test3"),new GameMode()),
+            new Game(new DateOnly(2023,06,03), new Player("test4"),new GameMode()),
+            new Game(new DateOnly(2023,06,03), new Player("test5"),new GameMode()),
 
         };
 

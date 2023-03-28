@@ -38,8 +38,9 @@ namespace Model
         }
         private int diceValue2;
 
-        public Turn(int diceValue1, int diceValue2)
+        public Turn(int Id, int diceValue1, int diceValue2)
         {
+            this.Id = Id;
             DiceValue1 = diceValue1;
             DiceValue2 = diceValue2;
         }
