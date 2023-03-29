@@ -15,7 +15,7 @@ namespace ModelTest
         public void Test_AddNewPlayer()
         {
             Player player = new Player("Jax");
-            GameMode gameMode = new GameMode("Classique");
+            GameMode gameMode = new GameMode();
             DateOnly dateTime = new DateOnly(2023, 01, 01);
             Game game = new Game(dateTime, player, gameMode, 1);
         }

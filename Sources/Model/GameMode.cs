@@ -24,9 +24,11 @@ namespace Model
         }
         private string name = "";
 
-        public GameMode(int id =0)
+        public GameMode(int id= 0,string name = "Classique")
         {
             this.Id = id;
+            this.Name = name;
+            
         }
     }
 }
