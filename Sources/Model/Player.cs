@@ -1,5 +1,5 @@
 ﻿namespace Model;
-    public class Player : IEquatable<Player>
+public class Player : IEquatable<Player>
 {
 
     public int Id { get; set; }
