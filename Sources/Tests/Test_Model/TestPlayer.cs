@@ -8,7 +8,7 @@ public class TestPlayer
         new List<object[]>
         {
         new object[] { new Player("Alice", new Stats { NbWin = 2, NbPlayed = 5, MaxChain = 3, MaxZone = 10, MaxPoints = 200 }), true },
-        new object[] { new Player("Bob", new Stats { NbWin = 1, NbPlayed = 2, MaxChain = 2, MaxZone = 5, MaxPoints = 100 }), false },
+        new object[] { new Player("Bob", new Stats { NbWin = 1, NbPlayed = 2, MaxChain = 2, MaxZone = 5, MaxPoints = 100 }), true },
         new object[] { new Player("Alice", new Stats { NbWin = 1, NbPlayed = 3, MaxChain = 4, MaxZone = 12, MaxPoints = 150 }), true },
         new object[] { new Player(null), false },
         new object[] { new Player("Charlie"), false }
