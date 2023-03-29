@@ -7,7 +7,7 @@ namespace Trek12_API.DTO
     {
         public int Id { get; set; }
         public TimeSpan Duration { get; set; }
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
         public List<TurnDTO> Turns { get; set; }
         public Dictionary<PlayerDTO, GrilleDTO> Grilles { get; set; }
         public Dictionary<PlayerDTO, int> Scores { get; set; }

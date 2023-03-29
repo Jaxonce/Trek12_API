@@ -13,7 +13,7 @@ namespace Model
 
         public TimeSpan Duration { get; set; }
 
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
 
         public ReadOnlyCollection<Player> Players { get; private set; }
         private List<Player> players;
@@ -42,16 +42,14 @@ namespace Model
         //    Id = id;
 
         //}
-        public Game(DateOnly date, Player ?owner, GameMode gameMode, int id = 0)
+        public Game(DateTime date, Player ?owner, GameMode gameMode, int id = 0)
         {
             Date = date;
             players = new();
             turns = new();
-            grilles = new Dictionary<Player, Grille>();
-            scores = new Dictionary<Player, int>();
             Players = new ReadOnlyCollection<Player>(players);
-            Grilles = new ReadOnlyDictionary<Player, Grille>(grilles);
-            Scores = new ReadOnlyDictionary<Player, int>(scores);
+            Grilles = new ReadOnlyDictionary<Player, Grille>(new Dictionary<Player, Grille>());
+            Scores = new ReadOnlyDictionary<Player, int>(new Dictionary<Player, int>());
             Turns = new ReadOnlyCollection<Turn>(turns);
             grilles.Add(owner, new Grille());
             scores.Add(owner, 0);
@@ -60,7 +58,13 @@ namespace Model
             Id = id;
         }
 
-        public Game(int id, TimeSpan duration, DateOnly date, List<Player> players, List<Turn> turns,  Dictionary<Player, Grille> grilles,  Dictionary<Player, int> scores, GameMode gameMode)
+        public Game(int id, ReadOnlyCollection<Player> players, GameMode gameMode)
+        {
+            Id = id;
+            GameMode = gameMode;
+        }
+
+        public Game(int id, TimeSpan duration, DateTime date, List<Player> players, List<Turn> turns,  Dictionary<Player, Grille> grilles,  Dictionary<Player, int> scores, GameMode gameMode)
         {
             Id = id;
             Duration = duration;

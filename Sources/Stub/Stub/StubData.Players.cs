@@ -12,10 +12,10 @@ namespace Stub
     {
         private List<Player> players = new()
         {
-            new Player("Aurelien"),
-            new Player("Theo"),
-            new Player("Maxence"),
-            new Player("Zakariya"),
+            new Player("Aurelien", 0),
+            new Player("Theo",1),
+            new Player("Maxence",2),
+            new Player("Zakariya",3),
         };
 
         public class PlayersManager : IPlayersManager

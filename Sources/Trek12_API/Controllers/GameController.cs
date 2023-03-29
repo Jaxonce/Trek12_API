@@ -65,7 +65,7 @@ namespace Trek12_API.Controllers
             return Ok("Partie bien supprimée");
         }
 
-/*        [HttpPut(Name = "UpdateGameById")]
+      /*[HttpPut(Name = "UpdateGameById")]
         public async Task<IActionResult> Update(int id, GameDTO newGame)
         {
             await gamesManager.UpdateItem(gamesManager.GetItemsById(id).Result.FirstOrDefault(), newGame.toModel());

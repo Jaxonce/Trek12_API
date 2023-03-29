@@ -26,6 +26,13 @@
         Stats = new Stats();
     }
 
+    public Player(string pseudo, int id)
+    {
+        Pseudo = pseudo;
+        Id = id;
+        Stats = new Stats();
+    }
+
     public Player(string pseudo, Stats stats, int id=0)
     {
         Pseudo = pseudo;

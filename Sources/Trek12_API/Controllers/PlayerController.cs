@@ -54,7 +54,7 @@ namespace Trek12_API.Controllers
             return Ok(player?.toDTOs());
         }
 
-        [HttpPost]
+        [HttpPost(Name= "AddPlayer")]
         public async Task<IActionResult> Post(PlayerDTO player)
         {
             Player playerToCreate = player.toModel();
