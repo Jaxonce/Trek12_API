@@ -45,15 +45,26 @@ namespace Model
         public Game(DateTime date, Player ?owner, GameMode gameMode, int id = 0)
         {
             Date = date;
+
+            // Creation list de player + ajout d'une player owner dans la liste
             players = new();
-            turns = new();
             Players = new ReadOnlyCollection<Player>(players);
-            Grilles = new ReadOnlyDictionary<Player, Grille>(new Dictionary<Player, Grille>());
-            Scores = new ReadOnlyDictionary<Player, int>(new Dictionary<Player, int>());
-            Turns = new ReadOnlyCollection<Turn>(turns);
-            grilles.Add(owner, new Grille());
-            scores.Add(owner, 0);
             players.Add(owner);
+
+            turns = new();
+            Turns = new ReadOnlyCollection<Turn>(turns);
+
+            if(grilles != null)
+            {
+                Grilles = new ReadOnlyDictionary<Player, Grille>(new Dictionary<Player, Grille>());
+                grilles.Add(owner, new Grille());
+            }
+
+            if(scores != null)
+            {
+                Scores = new ReadOnlyDictionary<Player, int>(new Dictionary<Player, int>());
+                scores.Add(owner, 0);
+            } 
             GameMode = gameMode;
             Id = id;
         }

@@ -11,7 +11,7 @@ namespace Trek12_API.Controllers
     public class GameController: ControllerBase
     {
         private readonly ILogger<GameController> _logger;
-        private StubData.GamesManager gamesManager { get; set; } = new StubData.GamesManager(new StubData());
+        private GamesManager gamesManager { get; set; } = new StubData.GamesManager(new StubData());
 
 
         public GameController(ILogger<GameController> logger)

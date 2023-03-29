@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using System.Text.Json.Serialization;
+using Model;
 using Trek12_API.DTO;
 
 namespace Trek12_API.Converter

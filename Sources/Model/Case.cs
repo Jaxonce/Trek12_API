@@ -26,7 +26,7 @@ namespace Model
 
         public Case()
         {
-
+            Valeur = 0;
         }
 
         public Case(int valeur)
