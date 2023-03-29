@@ -16,7 +16,7 @@ namespace ModelTest
         {
             Player player = new Player("Jax");
             GameMode gameMode = new GameMode();
-            DateOnly dateTime = new DateOnly(2023, 01, 01);
+            DateTime dateTime = new DateTime();
             Game game = new Game(dateTime, player, gameMode, 1);
         }
     }
