@@ -22,10 +22,10 @@ namespace Model
         private List<Turn> turns;
 
         public ReadOnlyDictionary<Player, Grille> Grilles { get; private set; }
-        private readonly Dictionary<Player, Grille> grilles;
+        private Dictionary<Player, Grille> grilles;
 
         public ReadOnlyDictionary<Player, int> Scores { get; private set; }
-        private readonly Dictionary<Player, int> scores;
+        private Dictionary<Player, int> scores;
 
         public GameMode GameMode { get; set; }
 
@@ -42,9 +42,9 @@ namespace Model
         //    Id = id;
 
         //}
-        public Game(DateTime date, Player ?owner, GameMode gameMode, int id = 0)
+        public Game(Player ?owner, GameMode gameMode, int id = 0)
         {
-            Date = date;
+            Date = DateTime.Now;
 
             // Creation list de player + ajout d'une player owner dans la liste
             players = new();
@@ -54,17 +54,16 @@ namespace Model
             turns = new();
             Turns = new ReadOnlyCollection<Turn>(turns);
 
-            if(grilles != null)
-            {
-                Grilles = new ReadOnlyDictionary<Player, Grille>(new Dictionary<Player, Grille>());
-                grilles.Add(owner, new Grille());
-            }
+            Grilles = new ReadOnlyDictionary<Player, Grille>(new Dictionary<Player, Grille>());
+            grilles ??= new Dictionary<Player, Grille>();
+            grilles.Add(owner, new Grille());
+            
+            
+            Scores = new ReadOnlyDictionary<Player, int>(new Dictionary<Player, int>());
 
-            if(scores != null)
-            {
-                Scores = new ReadOnlyDictionary<Player, int>(new Dictionary<Player, int>());
-                scores.Add(owner, 0);
-            } 
+            scores ??= new Dictionary<Player, int>();
+            scores.Add(owner, 0);
+           
             GameMode = gameMode;
             Id = id;
         }

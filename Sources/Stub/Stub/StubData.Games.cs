@@ -13,10 +13,10 @@ namespace Stub
     {
         private List<Game> games = new()
         {
-            new Game(new DateTime(), new Player("Aurélien",0),new GameMode(),1),
-            new Game(new DateTime(), new Player("Maxence",1),new GameMode(),2),
-            new Game(new DateTime(), new Player("Théo",2),new GameMode(),3),
-            new Game(new DateTime(), new Player("Zakariya",3),new GameMode(),4),
+            new Game(new Player("Aurélien",0),new GameMode(),1),
+            new Game(new Player("Maxence",1),new GameMode(),2),
+            new Game(new Player("Théo",2),new GameMode(),3),
+            new Game(new Player("Zakariya",3),new GameMode(),4),
         };
 
         public class GamesManager : IGamesManager
