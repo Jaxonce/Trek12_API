@@ -20,6 +20,8 @@ namespace EntityFrameWorkLib
 
         public DbSet<ScoreEntity> Score { get; set; }
 
+        public DbSet<StatsEntity> Stats { get; set; }
+
         public TrekContext() { }
         public TrekContext(DbContextOptions<TrekContext> options)
             : base(options)
@@ -78,8 +80,13 @@ namespace EntityFrameWorkLib
                 .WithOne(c => c.Grille)
                 .HasForeignKey(c => c.GrilleId);
 
+            modelBuilder.Entity<PlayerEntity>() //l'entité Player...
+             .HasOne(n => n.stats) //a une propriété obligatoire stats...
+             .WithOne(c => c.Player) //reliée à la propriété Player de Stats...
+             .HasForeignKey<StatsEntity>(c => c.PlayerId);//dont la propriété Id est une Foreign Key
+
             //Configuration des clés primaires et étrangères pour la table Participate
-            
+
 
             base.OnModelCreating(modelBuilder);
         }

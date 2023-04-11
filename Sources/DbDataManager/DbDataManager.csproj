@@ -8,5 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\Trek12_Lib\EntityFrameWorkLib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Mapper\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapper\" />
   </ItemGroup>
 </Project>

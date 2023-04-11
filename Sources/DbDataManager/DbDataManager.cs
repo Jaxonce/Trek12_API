@@ -3,7 +3,7 @@
 namespace DbDataManager;
 public class DbDataManager : IDataManager
 {
-    public IPlayersManager PlayersMgr => throw new NotImplementedException();
+    public IPlayersManager PlayersMgr => new PlayersManager();
 
     public IGamesManager GamesMgr => throw new NotImplementedException();
 

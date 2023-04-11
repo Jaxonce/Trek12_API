@@ -6,11 +6,6 @@ namespace Stub
     {
         public StubData()
         {
-            //ChampionsMgr = new ChampionsManager(this);
-            //SkinsMgr = new SkinsManager(this);
-            //RunesMgr = new RunesManager(this);
-            //RunePagesMgr = new RunePagesManager(this);
-
             PlayersMgr = new PlayersManager(this);
             GamesMgr = new GamesManager(this);
             GamesModeMgr = new GamesModeManager(this);

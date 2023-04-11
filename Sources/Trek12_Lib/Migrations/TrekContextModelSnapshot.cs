@@ -15,7 +15,7 @@ namespace EntityFrameWorkLib.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
 
             modelBuilder.Entity("EntityFrameWorkLib.CaseEntity", b =>
                 {
@@ -23,10 +23,15 @@ namespace EntityFrameWorkLib.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("GrilleId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Value")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("CaseId");
+
+                    b.HasIndex("GrilleId");
 
                     b.ToTable("Case");
                 });
@@ -44,13 +49,17 @@ namespace EntityFrameWorkLib.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("NbPlayers")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("GameId");
+
+                    b.HasIndex("PlayerId");
 
                     b.ToTable("Game");
                 });
@@ -84,23 +93,7 @@ namespace EntityFrameWorkLib.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MaxPoints")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MaxZone")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("NbPlayed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("NbPoints")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("NbWin")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Pseudo")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("PlayerId");
@@ -110,26 +103,52 @@ namespace EntityFrameWorkLib.Migrations
 
             modelBuilder.Entity("EntityFrameWorkLib.ScoreEntity", b =>
                 {
-                    b.Property<int>("ScoreId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("GameId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("NbPoints")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("PlayerId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("ScoreId");
+                    b.Property<int>("NbPointsTotal")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("GameId");
+                    b.HasKey("GameId", "PlayerId");
 
                     b.HasIndex("PlayerId");
 
                     b.ToTable("Score");
+                });
+
+            modelBuilder.Entity("EntityFrameWorkLib.StatsEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MaxChain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MaxPoints")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MaxZone")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NbPlayed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NbWin")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId")
+                        .IsUnique();
+
+                    b.ToTable("Stats");
                 });
 
             modelBuilder.Entity("EntityFrameWorkLib.TurnEntity", b =>
@@ -149,10 +168,32 @@ namespace EntityFrameWorkLib.Migrations
                     b.ToTable("Turn");
                 });
 
+            modelBuilder.Entity("EntityFrameWorkLib.CaseEntity", b =>
+                {
+                    b.HasOne("EntityFrameWorkLib.GrilleEntity", "Grille")
+                        .WithMany("Cases")
+                        .HasForeignKey("GrilleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grille");
+                });
+
+            modelBuilder.Entity("EntityFrameWorkLib.GameEntity", b =>
+                {
+                    b.HasOne("EntityFrameWorkLib.PlayerEntity", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("EntityFrameWorkLib.ScoreEntity", b =>
                 {
                     b.HasOne("EntityFrameWorkLib.GameEntity", "Game")
-                        .WithMany()
+                        .WithMany("Scores")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -166,6 +207,33 @@ namespace EntityFrameWorkLib.Migrations
                     b.Navigation("Game");
 
                     b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("EntityFrameWorkLib.StatsEntity", b =>
+                {
+                    b.HasOne("EntityFrameWorkLib.PlayerEntity", "Player")
+                        .WithOne("stats")
+                        .HasForeignKey("EntityFrameWorkLib.StatsEntity", "PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("EntityFrameWorkLib.GameEntity", b =>
+                {
+                    b.Navigation("Scores");
+                });
+
+            modelBuilder.Entity("EntityFrameWorkLib.GrilleEntity", b =>
+                {
+                    b.Navigation("Cases");
+                });
+
+            modelBuilder.Entity("EntityFrameWorkLib.PlayerEntity", b =>
+                {
+                    b.Navigation("stats")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
